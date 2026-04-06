@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f2742" />
+      <stop offset="100%" stop-color="#1f4fd6" />
+    </linearGradient>
+    <linearGradient id="card" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.14)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0.06)" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="110" cy="90" r="180" fill="rgba(16,160,107,0.14)" />
+  <circle cx="1100" cy="520" r="220" fill="rgba(255,255,255,0.08)" />
+  <rect x="70" y="78" width="1060" height="474" rx="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.14)" />
+  <text x="110" y="210" fill="#ffffff" font-size="66" font-family="Avenir Next, Arial, sans-serif" font-weight="800">Mortgage Refinance Guides</text>
+  <text x="110" y="284" fill="rgba(255,255,255,0.84)" font-size="34" font-family="Georgia, serif">Rates, APR, cash-out, FHA, VA, calculators, and premium refinance comparisons.</text>
+  <rect x="110" y="350" width="260" height="128" rx="26" fill="rgba(255,255,255,0.14)" />
+  <rect x="402" y="350" width="260" height="128" rx="26" fill="rgba(255,255,255,0.14)" />
+  <rect x="694" y="350" width="260" height="128" rx="26" fill="rgba(255,255,255,0.14)" />
+  <text x="138" y="405" fill="#fff" font-size="24" font-family="Avenir Next, Arial, sans-serif">30-year avg.</text>
+  <text x="138" y="446" fill="#fff" font-size="36" font-family="Avenir Next, Arial, sans-serif" font-weight="800">6.48%</text>
+  <text x="430" y="405" fill="#fff" font-size="24" font-family="Avenir Next, Arial, sans-serif">Break-even</text>
+  <text x="430" y="446" fill="#fff" font-size="36" font-family="Avenir Next, Arial, sans-serif" font-weight="800">24-36 mo</text>
+  <text x="722" y="405" fill="#fff" font-size="24" font-family="Avenir Next, Arial, sans-serif">Cost range</text>
+  <text x="722" y="446" fill="#fff" font-size="36" font-family="Avenir Next, Arial, sans-serif" font-weight="800">$2.6k-$8.1k</text>
+</svg>
