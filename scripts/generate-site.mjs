@@ -1604,6 +1604,7 @@ function layout(page) {
     <link rel="apple-touch-icon" href="${assetHref(page.slug, "assets/favicon.svg")}" />
     <link rel="preload" href="${assetHref(page.slug, "styles.css")}" as="style" />
     <link rel="stylesheet" href="${assetHref(page.slug, "styles.css")}" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3733223915347669" crossorigin="anonymous"></script>
   </head>
   <body data-page-type="${escapeHtml(page.type)}">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -1682,7 +1683,6 @@ function layout(page) {
     </div>
 
     <div id="schema-data" data-schema="${escapeHtml(JSON.stringify(schemaPayload))}"></div>
-    <script type="application/json" id="adsense-placeholder">{"client":"ca-pub-XXXXXXXXXXXXXXXX","status":"replace-after-deploy"}</script>
     <script src="${assetHref(page.slug, "main.js")}" defer></script>
   </body>
 </html>`;
