@@ -1,7 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = "/Users/javiperezz7/Documents/New project";
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const domain = "https://mortgagerefinanceguides.com";
 const brand = "Mortgage Refinance Guides";
 const lastmod = "2026-04-06";
@@ -3598,7 +3599,7 @@ function normalizeLocalPreviewLinks() {
       return;
     }
     if (!href.endsWith(".html") && !href.includes(".")) {
-      link.setAttribute("href", href.replace(/\\/$/, "") + "/index.html");
+      link.setAttribute("href", href.replace(/\\/$/, "") + ".html");
     }
   });
 }

@@ -316,7 +316,7 @@ function normalizeLocalPreviewLinks() {
       return;
     }
     if (!href.endsWith(".html") && !href.includes(".")) {
-      link.setAttribute("href", href.replace(/\/$/, "") + "/index.html");
+      link.setAttribute("href", href.replace(/\/$/, "") + ".html");
     }
   });
 }

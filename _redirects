@@ -1,3 +1,28 @@
-http://mortgagerefinanceguides.com/* https://mortgagerefinanceguides.com/:splat 301
-http://www.mortgagerefinanceguides.com/* https://mortgagerefinanceguides.com/:splat 301
-https://www.mortgagerefinanceguides.com/* https://mortgagerefinanceguides.com/:splat 301
+# HTTP+www to HTTPS non-www
+http://www.mortgagerefinanceguides.com/* https://mortgagerefinanceguides.com/:splat 301!
+# www to non-www
+https://www.mortgagerefinanceguides.com/* https://mortgagerefinanceguides.com/:splat 301!
+# HTTP to HTTPS
+http://mortgagerefinanceguides.com/* https://mortgagerefinanceguides.com/:splat 301!
+
+# Serve flat .html files at clean URLs (200 rewrites - existing)
+/calculators/cash-out-refinance-guide /calculators/cash-out-refinance-guide.html 200
+/calculators/refinance-break-even-guide /calculators/refinance-break-even-guide.html 200
+/calculators/closing-costs-guide /calculators/closing-costs-guide.html 200
+/calculators/pmi-removal-guide /calculators/pmi-removal-guide.html 200
+/calculators/home-equity-calculator-guide /calculators/home-equity-calculator-guide.html 200
+/calculators/refinance-closing-costs-calculator /calculators/refinance-closing-costs-calculator.html 200
+/calculators/cash-out-refinance-calculator-texas /calculators/cash-out-refinance-calculator-texas.html 200
+/calculators/mortgage-breakeven-calculator /calculators/mortgage-breakeven-calculator.html 200
+/calculators/refinance-equity-calculator /calculators/refinance-equity-calculator.html 200
+/calculators/refinance-savings-calculator /calculators/refinance-savings-calculator.html 200
+/states/california-refinance-guide /states/california-refinance-guide.html 200
+/states/florida-refinance-guide /states/florida-refinance-guide.html 200
+/states/new-york-refinance-guide /states/new-york-refinance-guide.html 200
+/states/illinois-refinance-guide /states/illinois-refinance-guide.html 200
+/states/arizona-refinance-guide /states/arizona-refinance-guide.html 200
+/guides/cash-out-refinance-requirements /guides/cash-out-refinance-requirements.html 200
+/guides/refinance-with-bad-credit /guides/refinance-with-bad-credit.html 200
+/guides/fha-streamline-refinance /guides/fha-streamline-refinance.html 200
+/guides/va-loan-refinance-guide /guides/va-loan-refinance-guide.html 200
+/guides/when-to-refinance-mortgage /guides/when-to-refinance-mortgage.html 200
