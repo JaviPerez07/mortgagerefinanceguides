@@ -46,7 +46,7 @@ Eso hacia que el render local fuese mas inestable de lo necesario y complicaba e
 - Titles y meta descriptions unicas.
 - Canonicals absolutas y limpias.
 - Open Graph y Twitter cards presentes.
-- Schema JSON-LD presente para WebSite, Organization, Person, BreadcrumbList, Article, FAQPage y WebApplication segun corresponda.
+- Schema JSON-LD presente para WebSite, Organization, BreadcrumbList, Article, FAQPage y WebApplication segun corresponda.
 - `sitemap.xml` y `robots.txt` listos para produccion.
 
 ## Estado final AdSense

@@ -38,7 +38,7 @@
 - Unique titles and meta descriptions remain generated per page.
 - Canonicals use absolute production URLs without `.html`.
 - Open Graph and Twitter cards remain present.
-- JSON-LD includes WebSite, Organization, Person, BreadcrumbList, Article, FAQPage, and WebApplication where relevant.
+- JSON-LD includes WebSite, Organization, BreadcrumbList, Article, FAQPage, and WebApplication where relevant.
 - XML sitemap and robots.txt remain aligned with `https://mortgagerefinanceguides.com`.
 
 ## Cloudflare status

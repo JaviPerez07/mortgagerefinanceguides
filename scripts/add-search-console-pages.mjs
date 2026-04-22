@@ -9,10 +9,6 @@ const socialImage = `${domain}/assets/social-cover.svg`;
 
 const site = {
   name: "Mortgage Refinance Guides",
-  author: "David Chen",
-  authorRole: "Mortgage Refinance Specialist",
-  authorBio:
-    "David Chen covers refinance pricing, approval trends, home equity strategy, and state-specific closing costs for U.S. homeowners comparing mortgage options.",
 };
 
 const marketSnapshot =
@@ -1088,11 +1084,6 @@ function articleSchema(page, title, canonical) {
     "@type": "Article",
     headline: page.h1,
     description: page.description,
-    author: {
-      "@type": "Person",
-      name: site.author,
-      jobTitle: site.authorRole,
-    },
     publisher: {
       "@type": "Organization",
       name: site.name,
@@ -1215,7 +1206,6 @@ function footerHtml() {
             </span>
           </a>
           <p>Mortgage Refinance Guides publishes editorial content for informational purposes only. We do not provide lending, legal, tax, or investment advice, and we do not originate mortgages.</p>
-          <p class="footer-social">Social: <a href="#">LinkedIn</a> <a href="#">X</a> <a href="#">YouTube</a></p>
         </div>
         <div>
           <h2>Categories</h2>
@@ -1247,7 +1237,6 @@ function footerHtml() {
       </div>
       <div class="container footer-base">
         <p>© 2026 Mortgage Refinance Guides. All rights reserved.</p>
-        <p>Prepared for Cloudflare Pages, Search Console, and AdSense implementation.</p>
       </div>
     </footer>
     <div class="cookie-banner" data-cookie-banner hidden>
@@ -1372,15 +1361,11 @@ function faqHtml(page) {
 }
 
 function authorBox() {
-  return `<section class="author-box">
-    <div class="author-avatar" aria-hidden="true">DC</div>
-    <div>
-      <p class="eyebrow">Reviewed and updated April 18, 2026</p>
-      <h3>${site.author}</h3>
-      <p class="author-role">${site.authorRole}</p>
-      <p>${site.authorBio}</p>
-    </div>
-  </section>`;
+  return `<div class="editorial-block">
+  <strong>Editorial Team</strong>
+  <p>Last reviewed: April 2026</p>
+  <p>This guide compiles information from public sources, official data, and industry disclosures. Content is reviewed quarterly against updated references.</p>
+</div>`;
 }
 
 function sidebar(page) {
@@ -1402,11 +1387,6 @@ function sidebar(page) {
           )
           .join("")}
       </ul>
-    </section>
-    <section class="sidebar-card">
-      <p class="eyebrow">AdSense ready</p>
-      <h3>Built for policy-safe monetization</h3>
-      <p>The layout prioritizes readable content, clear navigation, legal pages, trust signals, and user-first design without placeholder ad clutter.</p>
     </section>
   </div></aside>`;
 }
@@ -1660,6 +1640,83 @@ ${footerHtml()}
 `;
 }
 
+function renderGuidesIndex() {
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refinance Guides Hub | MortgageRefinanceGuides</title>
+    <meta name="description" content="Explore premium mortgage refinance guides covering cash-out, FHA, VA, bad credit, closing costs, and refinance timing for U.S. homeowners.">
+    <link rel="canonical" href="${domain}/guides">
+    <link rel="icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles.css">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Refinance Guides Hub | MortgageRefinanceGuides">
+    <meta property="og:description" content="Explore premium mortgage refinance guides covering cash-out, FHA, VA, bad credit, closing costs, and refinance timing for U.S. homeowners.">
+    <meta property="og:url" content="${domain}/guides">
+    <meta property="og:image" content="${socialImage}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Refinance Guides Hub | MortgageRefinanceGuides">
+    <meta name="twitter:description" content="Explore premium mortgage refinance guides covering cash-out, FHA, VA, bad credit, closing costs, and refinance timing for U.S. homeowners.">
+    <meta name="twitter:image" content="${socialImage}">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3733223915347669" crossorigin="anonymous"></script>
+    <script src="../main.js" defer></script>
+  </head>
+  <body data-page-type="page">
+${headerHtml()}
+    <main id="main-content">
+      <section class="hero hero-inner">
+        <div class="container">
+          <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li><a href="./">Guides</a></li></ol></nav>
+          <div class="page-hero">
+            <div>
+              <span class="badge">Updated 2026</span>
+              <h1>Refinance Guides Hub</h1>
+              <p class="hero-copy">Editorial refinance guides covering cash-out, FHA, VA, bad-credit scenarios, closing costs, and timing decisions for U.S. homeowners.</p>
+            </div>
+            <div class="hero-side panel">
+              <p class="eyebrow">Start here</p>
+              <h2>Build the shortlist before you lock</h2>
+              <div class="metric-grid">
+                <article><span>Best for</span><strong>Deep decision support</strong></article>
+                <article><span>Format</span><strong>Long-form editorial guides</strong></article>
+                <article><span>Updated</span><strong>2026</strong></article>
+                <article><span>Next step</span><strong>Pair with calculators</strong></article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section page-body">
+        <div class="container">
+          <div class="metric-grid">
+            <article><span>Primary topics</span><strong>Cash-out, FHA, VA, credit, timing</strong></article>
+            <article><span>Use case</span><strong>Quote comparison and planning</strong></article>
+            <article><span>Audience</span><strong>U.S. homeowners</strong></article>
+            <article><span>Editorial cadence</span><strong>Quarterly review</strong></article>
+          </div>
+          <section class="related-links">
+            <h2>Featured refinance guides</h2>
+            <div class="card-grid three">
+              <a class="mini-card" href="./cash-out-refinance-requirements"><strong>Cash-Out Refinance Requirements</strong><span>Credit, LTV, and DTI</span></a>
+              <a class="mini-card" href="./refinance-with-bad-credit"><strong>How to Refinance With Bad Credit</strong><span>Score improvement strategy</span></a>
+              <a class="mini-card" href="./fha-streamline-refinance"><strong>FHA Streamline Refinance Guide</strong><span>HUD-driven streamline path</span></a>
+              <a class="mini-card" href="./va-loan-refinance-guide"><strong>VA Loan Refinance Guide</strong><span>IRRRL and veteran options</span></a>
+              <a class="mini-card" href="./when-to-refinance-mortgage"><strong>When to Refinance Your Mortgage</strong><span>Timing and break-even</span></a>
+              <a class="mini-card" href="../guides/best-mortgage-refinance-rates/"><strong>Best Mortgage Refinance Rates</strong><span>Existing pillar guide</span></a>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+${footerHtml()}
+  </body>
+</html>
+`;
+}
+
 async function updateSitemap() {
   const sitemapPath = path.join(root, "sitemap.xml");
   let xml = await fs.readFile(sitemapPath, "utf8");
@@ -1694,6 +1751,7 @@ async function main() {
     await fs.mkdir(path.dirname(outputPath), { recursive: true });
     await fs.writeFile(outputPath, renderPage(page));
   }
+  await fs.writeFile(path.join(root, "guides", "index.html"), renderGuidesIndex());
   await updateSitemap();
 }
 

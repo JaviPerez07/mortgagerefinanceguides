@@ -16,12 +16,7 @@ const site = {
     "Premium U.S. mortgage refinance guidance, calculators, lender comparisons, and state-by-state refinance planning.",
   description:
     "Premium mortgage refinance guides for U.S. homeowners covering refinance rates, APR, cash-out options, FHA and VA programs, closing costs, lender comparisons, calculators, and state-by-state refinance planning.",
-  email: "editorial@mortgagerefinanceguides.com",
-  author: {
-    name: "Elena Brooks, CMB",
-    role: "Lead Mortgage Finance Editor",
-    bio: "Elena covers mortgage pricing, refinance underwriting, home equity strategy, and lender comparison research for U.S. homeowners. She specializes in translating complex mortgage economics into decision frameworks that are practical before speaking with a lender, broker, attorney, or housing counselor.",
-  },
+  email: "javiperezguides@gmail.com",
   organization: {
     name: "Mortgage Refinance Guides Editorial Team",
     legalName: "Mortgage Refinance Guides Editorial Team",
@@ -541,27 +536,15 @@ function slugFromUrl(url) {
 }
 
 function authorCard() {
-  return `<section class="author-box">
-    <div class="author-avatar" aria-hidden="true">${site.author.name
-      .split(" ")
-      .map((part) => part[0])
-      .join("")
-      .slice(0, 2)}</div>
-    <div>
-      <p class="eyebrow">Reviewed and updated ${year}</p>
-      <h3>${escapeHtml(site.author.name)}</h3>
-      <p class="author-role">${escapeHtml(site.author.role)}</p>
-      <p>${escapeHtml(site.author.bio)}</p>
-    </div>
-  </section>`;
+  return `<div class="editorial-block">
+  <strong>Editorial Team</strong>
+  <p>Last reviewed: April 2026</p>
+  <p>This guide compiles information from public sources, official data, and industry disclosures. Content is reviewed quarterly against updated references.</p>
+</div>`;
 }
 
 function trustPanel() {
-  return `<section class="trust-grid">
-    <article><strong>Editorial first</strong><p>We separate editorial analysis from commercial relationships and explain the assumptions behind every refinance scenario.</p></article>
-    <article><strong>Search Console ready</strong><p>Every page ships with clean canonicals, crawlable navigation, robots directives, Open Graph tags, and structured data.</p></article>
-    <article><strong>AdSense ready</strong><p>The site includes legal pages, author visibility, trust signals, cookie consent, and a clear user-first content experience.</p></article>
-  </section>`;
+  return "";
 }
 
 function homeHeroVisual() {
@@ -658,8 +641,6 @@ function homeSections() {
           <div class="hero-copy-stack">
             <div class="hero-chip-row">
               ${badge("Updated 2026")}
-              <span class="hero-chip">Editorially reviewed</span>
-              <span class="hero-chip">Cloudflare-ready build</span>
             </div>
             <h1>Refinance your mortgage with cleaner rate comparisons, sharper fee analysis, and premium scenario planning.</h1>
             <p class="hero-copy">Mortgage Refinance Guides combines lender-style quote logic, calculator-driven planning, and state-specific closing cost context so homeowners can compare refinance options with more confidence and less noise.</p>
@@ -855,12 +836,6 @@ function homeSections() {
           <p>We compare note rate, APR, lender fees, points, state settlement cost patterns, equity thresholds, and underwriting factors together. That keeps the content grounded in how borrowers actually experience refinance decisions.</p>
           <a class="text-link" href="./how-we-research/">Read the research methodology</a>
         </div>
-        <div class="panel editorial-card">
-          <p class="eyebrow">Trust signals</p>
-          <h2>Prepared for AdSense and search quality review</h2>
-          <p>Visible authorship, clear legal pages, structured FAQs, responsive calculators, clean internal navigation, and consistent schema are built into the site from the start.</p>
-          <a class="text-link" href="./editorial-policy/">See editorial policy</a>
-        </div>
       </div>
     </section>
 
@@ -879,12 +854,6 @@ function homeSections() {
         </div>
       </div>
     </section>
-
-    <section class="section section-soft">
-      <div class="container">
-        ${trustPanel()}
-      </div>
-    </section>
   `;
 }
 
@@ -893,13 +862,12 @@ function staticPageContent(slug, fromSlug = slug) {
     about: `
       <p>${brand} exists to help U.S. homeowners make refinance decisions with more context than a single rate quote can provide. Our editorial approach blends mortgage market structure, underwriting patterns, and practical household planning.</p>
       <p>We cover rate-and-term refinance, cash-out refinance, FHA streamline refinance, VA IRRRL, jumbo refinance, closing costs, credit score dynamics, PMI removal, home equity alternatives, and state-specific refinance differences.</p>
-      ${trustPanel()}
       ${authorCard()}
     `,
     contact: `
-      <p>Editorial inquiries, corrections, partnership disclosures, and research questions can be sent to <a href="mailto:${site.email}">${site.email}</a>. We review feedback related to accuracy, clarity, broken links, and user experience on an ongoing basis.</p>
+      ${site.email ? `<p>Editorial inquiries, corrections, partnership disclosures, and research questions can be sent to <a href="mailto:${site.email}">${site.email}</a>. We review feedback related to accuracy, clarity, broken links, and user experience on an ongoing basis.</p>` : `<p>We are updating our contact information. Please check back soon.</p>`}
       <div class="table-wrap"><table><tbody>
-        <tr><th>Email</th><td>${site.email}</td></tr>
+        ${site.email ? `<tr><th>Email</th><td>${site.email}</td></tr>` : `<tr><th>Status</th><td>We are updating our contact information. Please check back soon.</td></tr>`}
         <tr><th>Editorial response goal</th><td>2 business days</td></tr>
         <tr><th>Corrections process</th><td>Reviewed by editorial staff and updated when warranted</td></tr>
         <tr><th>Commercial inquiries</th><td>Clearly separated from editorial review</td></tr>
@@ -909,7 +877,7 @@ function staticPageContent(slug, fromSlug = slug) {
     "privacy-policy": `
       <p>We collect limited information needed to operate the site, understand aggregate traffic, and support standard website functionality. Information may include server logs, anonymized analytics signals, and voluntary form submissions if you contact us directly.</p>
       <p>We do not sell mortgage products. Third-party services used after deployment may include analytics, advertising, hosting, and email providers. Those providers may process technical data such as IP address, device details, referrer information, or cookie signals under their own privacy terms.</p>
-      <p>Users can manage browser cookie settings, reject optional cookie categories through the site banner, and contact us for privacy-related questions at <a href="mailto:${site.email}">${site.email}</a>.</p>
+      <p>Users can manage browser cookie settings, reject optional cookie categories through the site banner, and contact us for privacy-related questions${site.email ? ` at <a href="mailto:${site.email}">${site.email}</a>` : ""}.</p>
     `,
     terms: `
       <p>By using this website, you agree to use the content for informational and personal research purposes only. The content does not replace lender disclosures, legal advice, tax advice, investment advice, or counseling tailored to your situation.</p>
@@ -1571,7 +1539,6 @@ function layout(page) {
     image: `${domain}/assets/social-cover.svg`,
     published: lastmod,
     modified: lastmod,
-    author: site.author.name,
     siteName: site.name,
     organizationName: site.organization.name,
     organizationUrl: site.organization.url,
@@ -1654,7 +1621,6 @@ function layout(page) {
             </span>
           </a>
           <p>${escapeHtml(site.disclaimer)}</p>
-          <p class="footer-social">Social: <a href="#">LinkedIn</a> <a href="#">X</a> <a href="#">YouTube</a></p>
         </div>
         <div>
           <h2>Categories</h2>
@@ -1671,7 +1637,6 @@ function layout(page) {
       </div>
       <div class="container footer-base">
         <p>© ${year} ${escapeHtml(brand)}. All rights reserved.</p>
-        <p>Prepared for Cloudflare Pages, Search Console, and AdSense implementation.</p>
       </div>
     </footer>
 
@@ -1707,11 +1672,6 @@ function renderSidebar(slug) {
           )
           .join("")}
       </ul>
-    </section>
-    <section class="sidebar-card">
-      <p class="eyebrow">AdSense ready</p>
-      <h3>Built for policy-safe monetization</h3>
-      <p>The layout prioritizes readable content, clear navigation, legal pages, trust signals, and user-first design without placeholder ad clutter.</p>
     </section>
   `;
 }
@@ -2327,7 +2287,7 @@ h3 {
 .section-intro,
 .callout p,
 .sidebar-card p,
-.author-box p,
+.editorial-block p,
 .guide-card p,
 .feature-card p,
 .mini-card span,
@@ -2457,7 +2417,7 @@ h3 {
 .mini-card,
 .state-card,
 .sidebar-card,
-.author-box,
+.editorial-block,
 .callout,
 .calculator-shell,
 .trust-grid article,
@@ -2864,7 +2824,7 @@ th {
 }
 
 .sidebar-card,
-.author-box,
+.editorial-block,
 .callout,
 .calculator-shell {
   padding: 1.2rem;
@@ -2920,28 +2880,26 @@ th {
   border-left: 5px solid var(--green);
 }
 
-.author-box {
+.editorial-block {
   display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 1rem;
-  align-items: start;
+  gap: 0.55rem;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(13, 35, 59, 0.08);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
 }
 
-.author-avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, var(--navy), var(--blue));
-  color: #fff;
+.editorial-block strong {
+  color: var(--navy);
   font-family: var(--heading);
-  font-size: 1.3rem;
-  font-weight: 800;
+  font-size: 1.05rem;
 }
 
-.author-role {
-  margin-top: -0.25rem;
+.editorial-block p {
+  margin: 0;
+}
+
+.editorial-block p:first-of-type {
   color: var(--green);
 }
 
@@ -3317,14 +3275,16 @@ function injectSchema() {
       url: data.organizationUrl,
       logo: data.organizationLogo,
     },
-    {
+  ];
+
+  if (data.author) {
+    graph.push({
       "@context": "https://schema.org",
       "@type": "Person",
       name: data.author,
-      jobTitle: "Lead Mortgage Finance Editor",
       worksFor: { "@type": "Organization", name: data.organizationName },
-    },
-  ];
+    });
+  }
 
   if (Array.isArray(data.breadcrumbs) && data.breadcrumbs.length > 1) {
     graph.push({
@@ -3355,7 +3315,7 @@ function injectSchema() {
   }
 
   if (data.type === "home" || data.type === "article" || data.type === "page") {
-    graph.push({
+    const article = {
       "@context": "https://schema.org",
       "@type": "Article",
       headline: data.title,
@@ -3373,7 +3333,11 @@ function injectSchema() {
       },
       mainEntityOfPage: data.url,
       image: data.image,
-    });
+    };
+    if (data.author) {
+      article.author = { "@type": "Person", name: data.author };
+    }
+    graph.push(article);
   }
 
   if (data.type === "calculator") {
@@ -3779,7 +3743,7 @@ function walkthrough(pages) {
 
 ## Overview
 
-This project is a static editorial website prepared for Cloudflare Pages, Google Search Console, and future AdSense implementation.
+This project is a static editorial website for Cloudflare Pages with a shared generator, reusable components, and crawlable category architecture.
 
 - Domain reference: ${domain}
 - Build style: static HTML, single shared CSS, single shared JS
@@ -3817,7 +3781,7 @@ This project is a static editorial website prepared for Cloudflare Pages, Google
 - Absolute canonical URLs without \`.html\`
 - Open Graph and Twitter card tags
 - Breadcrumb navigation on interior pages
-- JSON-LD for WebSite, Organization, Person, BreadcrumbList, Article, FAQPage, and WebApplication where applicable
+- JSON-LD for WebSite, Organization, BreadcrumbList, Article, FAQPage, and WebApplication where applicable
 - XML sitemap and HTML sitemap included
 - \`robots.txt\` points to the production sitemap
 
@@ -3936,7 +3900,7 @@ function visualSeoAudit() {
 - Unique titles and meta descriptions remain generated per page.
 - Canonicals use absolute production URLs without \`.html\`.
 - Open Graph and Twitter cards remain present.
-- JSON-LD includes WebSite, Organization, Person, BreadcrumbList, Article, FAQPage, and WebApplication where relevant.
+- JSON-LD includes WebSite, Organization, BreadcrumbList, Article, FAQPage, and WebApplication where relevant.
 - XML sitemap and robots.txt remain aligned with \`https://mortgagerefinanceguides.com\`.
 
 ## Cloudflare status
@@ -4010,7 +3974,7 @@ Eso hacia que el render local fuese mas inestable de lo necesario y complicaba e
 - Titles y meta descriptions unicas.
 - Canonicals absolutas y limpias.
 - Open Graph y Twitter cards presentes.
-- Schema JSON-LD presente para WebSite, Organization, Person, BreadcrumbList, Article, FAQPage y WebApplication segun corresponda.
+- Schema JSON-LD presente para WebSite, Organization, BreadcrumbList, Article, FAQPage y WebApplication segun corresponda.
 - \`sitemap.xml\` y \`robots.txt\` listos para produccion.
 
 ## Estado final AdSense

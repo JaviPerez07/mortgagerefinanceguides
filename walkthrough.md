@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a static editorial website prepared for Cloudflare Pages, Google Search Console, and future AdSense implementation.
+This project is a static editorial website for Cloudflare Pages with a shared generator, reusable components, and crawlable category architecture.
 
 - Domain reference: https://mortgagerefinanceguides.com
 - Build style: static HTML, single shared CSS, single shared JS
@@ -40,7 +40,7 @@ This project is a static editorial website prepared for Cloudflare Pages, Google
 - Absolute canonical URLs without `.html`
 - Open Graph and Twitter card tags
 - Breadcrumb navigation on interior pages
-- JSON-LD for WebSite, Organization, Person, BreadcrumbList, Article, FAQPage, and WebApplication where applicable
+- JSON-LD for WebSite, Organization, BreadcrumbList, Article, FAQPage, and WebApplication where applicable
 - XML sitemap and HTML sitemap included
 - `robots.txt` points to the production sitemap
 

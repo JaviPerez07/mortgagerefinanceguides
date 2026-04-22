@@ -34,14 +34,16 @@ function injectSchema() {
       url: data.organizationUrl,
       logo: data.organizationLogo,
     },
-    {
+  ];
+
+  if (data.author) {
+    graph.push({
       "@context": "https://schema.org",
       "@type": "Person",
       name: data.author,
-      jobTitle: "Lead Mortgage Finance Editor",
       worksFor: { "@type": "Organization", name: data.organizationName },
-    },
-  ];
+    });
+  }
 
   if (Array.isArray(data.breadcrumbs) && data.breadcrumbs.length > 1) {
     graph.push({
@@ -72,7 +74,7 @@ function injectSchema() {
   }
 
   if (data.type === "home" || data.type === "article" || data.type === "page") {
-    graph.push({
+    const article = {
       "@context": "https://schema.org",
       "@type": "Article",
       headline: data.title,
@@ -90,7 +92,11 @@ function injectSchema() {
       },
       mainEntityOfPage: data.url,
       image: data.image,
-    });
+    };
+    if (data.author) {
+      article.author = { "@type": "Person", name: data.author };
+    }
+    graph.push(article);
   }
 
   if (data.type === "calculator") {

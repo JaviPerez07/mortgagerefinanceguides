@@ -319,7 +319,7 @@ h3 {
 .section-intro,
 .callout p,
 .sidebar-card p,
-.author-box p,
+.editorial-block p,
 .guide-card p,
 .feature-card p,
 .mini-card span,
@@ -449,7 +449,7 @@ h3 {
 .mini-card,
 .state-card,
 .sidebar-card,
-.author-box,
+.editorial-block,
 .callout,
 .calculator-shell,
 .trust-grid article,
@@ -856,7 +856,7 @@ th {
 }
 
 .sidebar-card,
-.author-box,
+.editorial-block,
 .callout,
 .calculator-shell {
   padding: 1.2rem;
@@ -912,28 +912,26 @@ th {
   border-left: 5px solid var(--green);
 }
 
-.author-box {
+.editorial-block {
   display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 1rem;
-  align-items: start;
+  gap: 0.55rem;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(13, 35, 59, 0.08);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
 }
 
-.author-avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, var(--navy), var(--blue));
-  color: #fff;
+.editorial-block strong {
+  color: var(--navy);
   font-family: var(--heading);
-  font-size: 1.3rem;
-  font-weight: 800;
+  font-size: 1.05rem;
 }
 
-.author-role {
-  margin-top: -0.25rem;
+.editorial-block p {
+  margin: 0;
+}
+
+.editorial-block p:first-of-type {
   color: var(--green);
 }
 
