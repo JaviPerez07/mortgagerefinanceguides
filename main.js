@@ -30,20 +30,19 @@ function injectSchema() {
     {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": "https://mortgagerefinanceguides.com/#organization",
       name: data.organizationName,
       url: data.organizationUrl,
       logo: data.organizationLogo,
+      email: "javiperezguides@gmail.com",
+      founder: {
+        "@type": "Person",
+        name: "Javi Pérez",
+        url: "https://www.linkedin.com/in/javi-perez-guides",
+        sameAs: ["https://www.linkedin.com/in/javi-perez-guides"],
+      },
     },
   ];
-
-  if (data.author) {
-    graph.push({
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: data.author,
-      worksFor: { "@type": "Organization", name: data.organizationName },
-    });
-  }
 
   if (Array.isArray(data.breadcrumbs) && data.breadcrumbs.length > 1) {
     graph.push({
@@ -81,7 +80,12 @@ function injectSchema() {
       description: data.description,
       datePublished: data.published,
       dateModified: data.modified,
-      author: { "@type": "Person", name: data.author },
+      editor: {
+        "@type": "Person",
+        name: "Javi Pérez",
+        url: "https://www.linkedin.com/in/javi-perez-guides",
+        sameAs: ["https://www.linkedin.com/in/javi-perez-guides"],
+      },
       publisher: {
         "@type": "Organization",
         name: data.organizationName,
@@ -93,9 +97,6 @@ function injectSchema() {
       mainEntityOfPage: data.url,
       image: data.image,
     };
-    if (data.author) {
-      article.author = { "@type": "Person", name: data.author };
-    }
     graph.push(article);
   }
 

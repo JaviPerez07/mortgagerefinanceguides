@@ -536,10 +536,13 @@ function slugFromUrl(url) {
 }
 
 function authorCard() {
-  return `<div class="editorial-block">
-  <strong>Editorial Team</strong>
-  <p>Last reviewed: April 2026</p>
-  <p>This guide compiles information from public sources, official data, and industry disclosures. Content is reviewed quarterly against updated references.</p>
+  return `<div class="editorial-block editorial-byline">
+  <img src="/assets/javi-perez-guides.jpg" width="48" height="48" loading="lazy" alt="Javi Pérez" class="editorial-avatar">
+  <div>
+    <strong>Javi Pérez</strong> · Editor, ${brand}
+    <a href="https://www.linkedin.com/in/javi-perez-guides" rel="noopener" target="_blank">LinkedIn</a>
+    <p>Last reviewed: April 2026 — content checked quarterly against CFPB, Freddie Mac, and FHFA public data sources.</p>
+  </div>
 </div>`;
 }
 
@@ -860,8 +863,12 @@ function homeSections() {
 function staticPageContent(slug, fromSlug = slug) {
   const pages = {
     about: `
-      <p>${brand} exists to help U.S. homeowners make refinance decisions with more context than a single rate quote can provide. Our editorial approach blends mortgage market structure, underwriting patterns, and practical household planning.</p>
-      <p>We cover rate-and-term refinance, cash-out refinance, FHA streamline refinance, VA IRRRL, jumbo refinance, closing costs, credit score dynamics, PMI removal, home equity alternatives, and state-specific refinance differences.</p>
+      <p>${brand} was founded by Javi Pérez, a technology professional based in Almería, Spain, who built this site to help U.S. homeowners compare mortgage refinance options using verified public data rather than promotional lender marketing. Javi has been building independent editorial finance guides since 2023 and maintains this site without lender sponsorship.</p>
+      <p>This site covers rate-and-term refinance, cash-out refinance, FHA streamline refinance, VA IRRRL, jumbo refinance, closing costs, credit score dynamics, PMI removal, home equity alternatives, and state-specific refinance differences. All content is researched against primary sources including CFPB, Freddie Mac, FHFA, BLS, and HUD guidance.</p>
+      <p>Connect with Javi on <a href="https://www.linkedin.com/in/javi-perez-guides" rel="noopener" target="_blank">LinkedIn</a>.</p>
+      <div class="callout callout-warning">
+        <strong>Important disclaimer:</strong> I am NOT a licensed mortgage broker, loan officer, or financial advisor. Nothing on this site constitutes mortgage, financial, or legal advice. Consult a licensed professional for your specific situation.
+      </div>
       ${authorCard()}
     `,
     contact: `
@@ -894,8 +901,17 @@ function staticPageContent(slug, fromSlug = slug) {
       <p>Essential cookies may support user interface preferences, consent storage, and security-related behavior. Optional technologies may help us understand which guides are useful, how readers navigate, and how advertising performs after approval and implementation.</p>
     `,
     "editorial-policy": `
-      <p>Our editorial team prioritizes accuracy, clarity, and decision usefulness. We aim to publish content that helps readers compare refinance options on a like-for-like basis rather than chase headline rates without context.</p>
-      <p>Content is planned around user intent, reviewed for internal consistency, updated when material mortgage conditions change, and clearly separated from sponsorship or advertising considerations. If compensation relationships are introduced later, they should be disclosed on relevant pages.</p>
+      <p>Our editorial approach prioritizes accuracy, clarity, and decision usefulness. We publish content that helps readers compare refinance options on a like-for-like basis rather than chase headline rates without context. Content is reviewed for internal consistency, updated when material mortgage conditions change, and clearly separated from advertising considerations.</p>
+      <h2>Sourcing Hierarchy</h2>
+      <p>All factual claims on this site are verified against primary public sources in this order of priority:</p>
+      <ol>
+        <li><a href="https://www.consumerfinance.gov" rel="noopener" target="_blank">CFPB.gov</a> — Consumer Financial Protection Bureau mortgage disclosures and borrower guides</li>
+        <li><a href="https://www.freddiemac.com" rel="noopener" target="_blank">FreddieMac.com</a> — Primary Mortgage Market Survey and weekly rate data</li>
+        <li><a href="https://www.fhfa.gov" rel="noopener" target="_blank">FHFA.gov</a> — Federal Housing Finance Agency conforming loan limits and market statistics</li>
+        <li><a href="https://www.bls.gov" rel="noopener" target="_blank">BLS.gov</a> — Bureau of Labor Statistics economic and employment data</li>
+        <li><a href="https://www.hud.gov" rel="noopener" target="_blank">HUD.gov</a> — Department of Housing and Urban Development program guidelines and FHA requirements</li>
+      </ol>
+      <p>Rate examples, payment illustrations, and approval estimates are educational. They do not constitute lending offers or guaranteed outcomes. If compensation relationships are introduced, they will be disclosed on relevant pages.</p>
       ${authorCard()}
     `,
     "how-we-research": `
@@ -2903,6 +2919,32 @@ th {
   color: var(--green);
 }
 
+.editorial-byline {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.editorial-avatar {
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.editorial-byline > div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.editorial-byline a {
+  color: var(--link, #1f4fd6);
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.editorial-byline a:hover {
+  text-decoration: underline;
+}
+
 .calculator-form {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -3271,20 +3313,19 @@ function injectSchema() {
     {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": "https://mortgagerefinanceguides.com/#organization",
       name: data.organizationName,
       url: data.organizationUrl,
       logo: data.organizationLogo,
+      email: "javiperezguides@gmail.com",
+      founder: {
+        "@type": "Person",
+        name: "Javi Pérez",
+        url: "https://www.linkedin.com/in/javi-perez-guides",
+        sameAs: ["https://www.linkedin.com/in/javi-perez-guides"],
+      },
     },
   ];
-
-  if (data.author) {
-    graph.push({
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: data.author,
-      worksFor: { "@type": "Organization", name: data.organizationName },
-    });
-  }
 
   if (Array.isArray(data.breadcrumbs) && data.breadcrumbs.length > 1) {
     graph.push({
@@ -3322,7 +3363,12 @@ function injectSchema() {
       description: data.description,
       datePublished: data.published,
       dateModified: data.modified,
-      author: { "@type": "Person", name: data.author },
+      editor: {
+        "@type": "Person",
+        name: "Javi Pérez",
+        url: "https://www.linkedin.com/in/javi-perez-guides",
+        sameAs: ["https://www.linkedin.com/in/javi-perez-guides"],
+      },
       publisher: {
         "@type": "Organization",
         name: data.organizationName,
@@ -3334,9 +3380,6 @@ function injectSchema() {
       mainEntityOfPage: data.url,
       image: data.image,
     };
-    if (data.author) {
-      article.author = { "@type": "Person", name: data.author };
-    }
     graph.push(article);
   }
 
@@ -4013,8 +4056,8 @@ async function main() {
 
   await writeFile(path.join(root, "styles.css"), stylesCss());
   await writeFile(path.join(root, "main.js"), mainJs());
-  await writeFile(path.join(root, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${domain}/sitemap.xml\n`);
-  await writeFile(path.join(root, "ads.txt"), "google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0\n");
+  await writeFile(path.join(root, "robots.txt"), `User-agent: *\nAllow: /\nDisallow: /*?q=*\nDisallow: /*?s=*\nSitemap: ${domain}/sitemap.xml\n`);
+  await writeFile(path.join(root, "ads.txt"), "google.com, pub-3733223915347669, DIRECT, f08c47fec0942fa0\n");
   await writeFile(path.join(root, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urlEntries}</urlset>\n`);
   await writeFile(path.join(root, "walkthrough.md"), walkthrough(pages));
   await writeFile(path.join(root, "pre-deployment-checklist.md"), checklist());

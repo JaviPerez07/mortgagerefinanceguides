@@ -1361,10 +1361,13 @@ function faqHtml(page) {
 }
 
 function authorBox() {
-  return `<div class="editorial-block">
-  <strong>Editorial Team</strong>
-  <p>Last reviewed: April 2026</p>
-  <p>This guide compiles information from public sources, official data, and industry disclosures. Content is reviewed quarterly against updated references.</p>
+  return `<div class="editorial-block editorial-byline">
+  <img src="/assets/javi-perez-guides.jpg" width="48" height="48" loading="lazy" alt="Javi Pérez" class="editorial-avatar">
+  <div>
+    <strong>Javi Pérez</strong> · Editor, Mortgage Refinance Guides
+    <a href="https://www.linkedin.com/in/javi-perez-guides" rel="noopener" target="_blank">LinkedIn</a>
+    <p>Last reviewed: April 2026 — content checked quarterly against CFPB, Freddie Mac, and FHFA public data sources.</p>
+  </div>
 </div>`;
 }
 
