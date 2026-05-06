@@ -1,28 +1,28 @@
+# Legacy companion .html files migrated to directory structure (Sprint 2 — May 2026)
+/guides/cash-out-refinance-requirements.html /guides/cash-out-refinance-requirements/ 301
+/guides/when-to-refinance-mortgage.html /guides/when-to-refinance-mortgage/ 301
+/guides/va-loan-refinance-guide.html /guides/va-loan-refinance-guide/ 301
+/guides/refinance-with-bad-credit.html /guides/refinance-with-bad-credit/ 301
+/guides/fha-streamline-refinance.html /guides/fha-streamline-refinance/ 301
+/calculators/refinance-equity-calculator.html /calculators/refinance-equity-calculator/ 301
+/calculators/pmi-removal-guide.html /calculators/pmi-removal-guide/ 301
+/calculators/refinance-closing-costs-calculator.html /calculators/refinance-closing-costs-calculator/ 301
+/calculators/refinance-savings-calculator.html /calculators/refinance-savings-calculator/ 301
+/calculators/cash-out-refinance-guide.html /calculators/cash-out-refinance-guide/ 301
+/calculators/closing-costs-guide.html /calculators/closing-costs-guide/ 301
+/calculators/home-equity-calculator-guide.html /calculators/home-equity-calculator-guide/ 301
+/calculators/refinance-break-even-guide.html /calculators/refinance-break-even-guide/ 301
+/calculators/mortgage-breakeven-calculator.html /calculators/mortgage-breakeven-calculator/ 301
+/calculators/cash-out-refinance-calculator-texas.html /calculators/cash-out-refinance-calculator-texas/ 301
+/states/arizona-refinance-guide.html /states/arizona-refinance-guide/ 301
+/states/california-refinance-guide.html /states/california-refinance-guide/ 301
+/states/florida-refinance-guide.html /states/florida-refinance-guide/ 301
+/states/new-york-refinance-guide.html /states/new-york-refinance-guide/ 301
+/states/illinois-refinance-guide.html /states/illinois-refinance-guide/ 301
+
 # HTTP+www to HTTPS non-www
 http://www.mortgagerefinanceguides.com/* https://mortgagerefinanceguides.com/:splat 301!
 # www to non-www
 https://www.mortgagerefinanceguides.com/* https://mortgagerefinanceguides.com/:splat 301!
 # HTTP to HTTPS
 http://mortgagerefinanceguides.com/* https://mortgagerefinanceguides.com/:splat 301!
-
-# Legacy companion .html files migrated to directory structure (Sprint 2 — May 2026)
-/guides/cash-out-refinance-requirements.html /guides/cash-out-refinance-requirements/ 301!
-/guides/when-to-refinance-mortgage.html /guides/when-to-refinance-mortgage/ 301!
-/guides/va-loan-refinance-guide.html /guides/va-loan-refinance-guide/ 301!
-/guides/refinance-with-bad-credit.html /guides/refinance-with-bad-credit/ 301!
-/guides/fha-streamline-refinance.html /guides/fha-streamline-refinance/ 301!
-/calculators/refinance-equity-calculator.html /calculators/refinance-equity-calculator/ 301!
-/calculators/pmi-removal-guide.html /calculators/pmi-removal-guide/ 301!
-/calculators/refinance-closing-costs-calculator.html /calculators/refinance-closing-costs-calculator/ 301!
-/calculators/refinance-savings-calculator.html /calculators/refinance-savings-calculator/ 301!
-/calculators/cash-out-refinance-guide.html /calculators/cash-out-refinance-guide/ 301!
-/calculators/closing-costs-guide.html /calculators/closing-costs-guide/ 301!
-/calculators/home-equity-calculator-guide.html /calculators/home-equity-calculator-guide/ 301!
-/calculators/refinance-break-even-guide.html /calculators/refinance-break-even-guide/ 301!
-/calculators/mortgage-breakeven-calculator.html /calculators/mortgage-breakeven-calculator/ 301!
-/calculators/cash-out-refinance-calculator-texas.html /calculators/cash-out-refinance-calculator-texas/ 301!
-/states/arizona-refinance-guide.html /states/arizona-refinance-guide/ 301!
-/states/california-refinance-guide.html /states/california-refinance-guide/ 301!
-/states/florida-refinance-guide.html /states/florida-refinance-guide/ 301!
-/states/new-york-refinance-guide.html /states/new-york-refinance-guide/ 301!
-/states/illinois-refinance-guide.html /states/illinois-refinance-guide/ 301!
