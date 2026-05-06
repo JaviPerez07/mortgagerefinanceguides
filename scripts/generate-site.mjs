@@ -4009,6 +4009,94 @@ Eso hacia que el render local fuese mas inestable de lo necesario y complicaba e
 `;
 }
 
+function build404Page() {
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page Not Found | ${escapeHtml(brand)}</title>
+    <meta name="description" content="The page you're looking for doesn't exist or has been moved. Browse refinance rates, calculators, and guides from the homepage." />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#12355b" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="icon" href="/assets/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/assets/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body data-page-type="error">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-shell">
+        <div class="header-inner">
+          <a class="brand" href="/">
+            <img src="/assets/logo-mark.svg" alt="${escapeHtml(brand)} logo" width="50" height="50" loading="eager" />
+            <span>
+              <strong>${escapeHtml(brand)}</strong>
+              <small>U.S. refinance rates, calculators, and comparisons</small>
+            </span>
+          </a>
+          <nav class="site-nav" aria-label="Primary">
+            <div class="nav-links">
+              ${navGroups.map(([label, href]) => `<a class="nav-link" href="${href}">${escapeHtml(label)}</a>`).join("")}
+            </div>
+            <div class="nav-actions">
+              <a class="nav-ghost" href="/about/">About</a>
+              <a class="nav-cta" href="/calculators/mortgage-refinance-calculator/">Start Calculating</a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero hero-inner">
+        <div class="container">
+          <div class="page-hero">
+            <div>
+              <span class="badge">Error 404</span>
+              <h1>Page Not Found</h1>
+              <p class="hero-copy">The page you're looking for doesn't exist or has been moved. Try browsing from the homepage.</p>
+              <div class="hero-actions">
+                <a class="button button-primary" href="/">Go to homepage</a>
+                <a class="button button-secondary" href="/sitemap/">Browse sitemap</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand brand-footer" href="/">
+            <img src="/assets/logo-mark.svg" alt="" width="42" height="42" loading="lazy" />
+            <span>
+              <strong>${escapeHtml(brand)}</strong>
+              <small>${escapeHtml(site.tagline)}</small>
+            </span>
+          </a>
+          <p>${escapeHtml(site.disclaimer)}</p>
+        </div>
+        <div>
+          <h2>Categories</h2>
+          <ul>${footerCategoryLinks.map(([label, href]) => `<li><a href="${href}">${escapeHtml(label)}</a></li>`).join("")}</ul>
+        </div>
+        <div>
+          <h2>Company</h2>
+          <ul>${legalLinks.map(([label, href]) => `<li><a href="${href}">${escapeHtml(label)}</a></li>`).join("")}</ul>
+        </div>
+      </div>
+      <div class="container footer-base">
+        <p>© ${year} ${escapeHtml(brand)}. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+`;
+}
+
 async function main() {
   const pages = [];
 
@@ -4029,6 +4117,7 @@ async function main() {
   await writeFile(path.join(root, "main.js"), mainJs());
   await writeFile(path.join(root, "robots.txt"), `User-agent: *\nAllow: /\nDisallow: /*?q=*\nDisallow: /*?s=*\nSitemap: ${domain}/sitemap.xml\n`);
   await writeFile(path.join(root, "ads.txt"), "google.com, pub-3733223915347669, DIRECT, f08c47fec0942fa0\n");
+  await writeFile(path.join(root, "404.html"), build404Page());
   await writeFile(path.join(root, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urlEntries}</urlset>\n`);
   await writeFile(path.join(root, "walkthrough.md"), walkthrough(pages));
   await writeFile(path.join(root, "pre-deployment-checklist.md"), checklist());
