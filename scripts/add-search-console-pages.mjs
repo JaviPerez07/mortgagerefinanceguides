@@ -3,7 +3,8 @@ import path from "node:path";
 
 const root = process.cwd();
 const domain = "https://mortgagerefinanceguides.com";
-const dateModified = "2026-04-18";
+const dateModified = "2026-05-06";
+const monthYear = "May 2026";
 const brand = "MortgageRefinanceGuides";
 const socialImage = `${domain}/assets/social-cover.svg`;
 
@@ -1034,6 +1035,14 @@ const pages = [
   },
 ];
 
+for (const page of pages) {
+  page.file = page.file.replace(/\.html$/, "/index.html");
+  if (!page.cleanPath.endsWith("/")) page.cleanPath += "/";
+  if (page.calculatorCleanPath && !page.calculatorCleanPath.endsWith("/")) {
+    page.calculatorCleanPath += "/";
+  }
+}
+
 function relLink(fromFile, targetPath) {
   const fromDir = path.posix.dirname(`/${fromFile}`);
   const normalized = targetPath.replace(/^\//, "");
@@ -1050,8 +1059,13 @@ function writeFilePath(file) {
   return path.join(root, file);
 }
 
+function relToRoot(file) {
+  const depth = file.split("/").length - 1;
+  return "../".repeat(depth);
+}
+
 function metaTags(page) {
-  const rel = "../";
+  const rel = relToRoot(page.file);
   const canonical = `${domain}${page.cleanPath}`;
   const title = `${page.title} | ${brand}`;
   return `    <meta charset="UTF-8">
@@ -1084,6 +1098,12 @@ function articleSchema(page, title, canonical) {
     "@type": "Article",
     headline: page.h1,
     description: page.description,
+    editor: {
+      "@type": "Person",
+      name: "Javi Pérez",
+      url: "https://www.linkedin.com/in/javi-perez-guides",
+      sameAs: ["https://www.linkedin.com/in/javi-perez-guides"],
+    },
     publisher: {
       "@type": "Organization",
       name: site.name,
@@ -1109,13 +1129,13 @@ function breadcrumbSchema(page, canonical) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: domain,
+        item: `${domain}/`,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: group.label,
-        item: `${domain}${group.cleanHref.replace(/\/$/, "")}`,
+        item: `${domain}${group.cleanHref}`,
       },
       {
         "@type": "ListItem",
@@ -1262,7 +1282,7 @@ function heroSide(page) {
     )
     .join("");
   return `<div class="hero-side panel">
-      <p class="eyebrow">Updated April 18, 2026</p>
+      <p class="eyebrow">Updated ${monthYear}</p>
       <h2>Market snapshot</h2>
       <p>${escapeHtml(marketSnapshot)}</p>
       <div class="metric-grid">${metrics}</div>
@@ -1600,7 +1620,7 @@ function renderBody(page) {
           ${breadcrumbsHtml(page)}
           <div class="page-hero">
             <div>
-              <span class="badge">Updated 2026</span>
+              <span class="badge">Updated ${monthYear}</span>
               <h1>${escapeHtml(page.h1)}</h1>
               <p class="hero-copy">${escapeHtml(page.description)}</p>
               <div class="hero-actions">
@@ -1651,14 +1671,14 @@ function renderGuidesIndex() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Refinance Guides Hub | MortgageRefinanceGuides</title>
     <meta name="description" content="Explore premium mortgage refinance guides covering cash-out, FHA, VA, bad credit, closing costs, and refinance timing for U.S. homeowners.">
-    <link rel="canonical" href="${domain}/guides">
+    <link rel="canonical" href="${domain}/guides/">
     <link rel="icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles.css">
     <meta name="robots" content="index, follow">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Refinance Guides Hub | MortgageRefinanceGuides">
     <meta property="og:description" content="Explore premium mortgage refinance guides covering cash-out, FHA, VA, bad credit, closing costs, and refinance timing for U.S. homeowners.">
-    <meta property="og:url" content="${domain}/guides">
+    <meta property="og:url" content="${domain}/guides/">
     <meta property="og:image" content="${socialImage}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Refinance Guides Hub | MortgageRefinanceGuides">
@@ -1666,6 +1686,8 @@ function renderGuidesIndex() {
     <meta name="twitter:image" content="${socialImage}">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3733223915347669" crossorigin="anonymous"></script>
     <script src="../main.js" defer></script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Refinance Guides Hub","description":"Editorial refinance guides covering cash-out, FHA, VA, bad-credit scenarios, closing costs, and timing decisions for U.S. homeowners.","url":"${domain}/guides/","dateModified":"${dateModified}","publisher":{"@type":"Organization","name":"Mortgage Refinance Guides","logo":{"@type":"ImageObject","url":"${domain}/assets/logo-mark.svg"}}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"${domain}/"},{"@type":"ListItem","position":2,"name":"Guides","item":"${domain}/guides/"}]}</script>
   </head>
   <body data-page-type="page">
 ${headerHtml()}
@@ -1675,7 +1697,7 @@ ${headerHtml()}
           <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li><a href="./">Guides</a></li></ol></nav>
           <div class="page-hero">
             <div>
-              <span class="badge">Updated 2026</span>
+              <span class="badge">Updated ${monthYear}</span>
               <h1>Refinance Guides Hub</h1>
               <p class="hero-copy">Editorial refinance guides covering cash-out, FHA, VA, bad-credit scenarios, closing costs, and timing decisions for U.S. homeowners.</p>
             </div>
@@ -1685,7 +1707,7 @@ ${headerHtml()}
               <div class="metric-grid">
                 <article><span>Best for</span><strong>Deep decision support</strong></article>
                 <article><span>Format</span><strong>Long-form editorial guides</strong></article>
-                <article><span>Updated</span><strong>2026</strong></article>
+                <article><span>Updated</span><strong>${monthYear}</strong></article>
                 <article><span>Next step</span><strong>Pair with calculators</strong></article>
               </div>
             </div>

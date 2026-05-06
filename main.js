@@ -1,124 +1,6 @@
 
 const COOKIE_NAME = "mrg_cookie_pref";
 
-function parseSchema() {
-  const holder = document.querySelector("#schema-data");
-  if (!holder) return null;
-  try {
-    return JSON.parse(holder.dataset.schema || "{}");
-  } catch {
-    return null;
-  }
-}
-
-function injectSchema() {
-  const data = parseSchema();
-  if (!data || document.querySelector("#dynamic-schema")) return;
-
-  const graph = [
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: data.siteName,
-      url: "https://mortgagerefinanceguides.com/",
-      potentialAction: {
-        "@type": "SearchAction",
-        target: "https://mortgagerefinanceguides.com/?q={search_term_string}",
-        "query-input": "required name=search_term_string",
-      },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "@id": "https://mortgagerefinanceguides.com/#organization",
-      name: data.organizationName,
-      url: data.organizationUrl,
-      logo: data.organizationLogo,
-      email: "javiperezguides@gmail.com",
-      founder: {
-        "@type": "Person",
-        name: "Javi Pérez",
-        url: "https://www.linkedin.com/in/javi-perez-guides",
-        sameAs: ["https://www.linkedin.com/in/javi-perez-guides"],
-      },
-    },
-  ];
-
-  if (Array.isArray(data.breadcrumbs) && data.breadcrumbs.length > 1) {
-    graph.push({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: data.breadcrumbs.map((crumb, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        name: crumb.label,
-        item: crumb.href,
-      })),
-    });
-  }
-
-  if (Array.isArray(data.faqs) && data.faqs.length) {
-    graph.push({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: data.faqs.map((faq) => ({
-        "@type": "Question",
-        name: faq.q,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.a,
-        },
-      })),
-    });
-  }
-
-  if (data.type === "home" || data.type === "article" || data.type === "page") {
-    const article = {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      headline: data.title,
-      description: data.description,
-      datePublished: data.published,
-      dateModified: data.modified,
-      editor: {
-        "@type": "Person",
-        name: "Javi Pérez",
-        url: "https://www.linkedin.com/in/javi-perez-guides",
-        sameAs: ["https://www.linkedin.com/in/javi-perez-guides"],
-      },
-      publisher: {
-        "@type": "Organization",
-        name: data.organizationName,
-        logo: {
-          "@type": "ImageObject",
-          url: data.organizationLogo,
-        },
-      },
-      mainEntityOfPage: data.url,
-      image: data.image,
-    };
-    graph.push(article);
-  }
-
-  if (data.type === "calculator") {
-    graph.push({
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      name: data.title,
-      url: data.url,
-      applicationCategory: "FinanceApplication",
-      operatingSystem: "Any",
-      description: data.description,
-    });
-  }
-
-  const script = document.createElement("script");
-  script.id = "dynamic-schema";
-  script.type = "application/ld+json";
-  script.textContent = JSON.stringify(graph);
-  document.head.appendChild(script);
-}
-
 function setupMenu() {
   const button = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".site-nav");
@@ -344,7 +226,6 @@ function markCurrentNav() {
 
 document.addEventListener("DOMContentLoaded", () => {
   normalizeLocalPreviewLinks();
-  injectSchema();
   setupMenu();
   setupCookieBanner();
   setupCalculators();

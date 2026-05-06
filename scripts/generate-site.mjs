@@ -5,8 +5,9 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const domain = "https://mortgagerefinanceguides.com";
 const brand = "Mortgage Refinance Guides";
-const lastmod = "2026-04-06";
+const lastmod = "2026-05-06";
 const year = "2026";
+const monthYear = "May 2026";
 
 const site = {
   name: brand,
@@ -321,15 +322,15 @@ const statePages = [
 
 const staticPages = [
   { slug: "", h1: "Mortgage Refinance Guides", title: "Mortgage Refinance Guides | Rates, Calculators, Cash-Out", type: "home" },
-  { slug: "about", h1: "About Mortgage Refinance Guides", title: "About Mortgage Refinance Guides | Editorial Mission", type: "page" },
-  { slug: "contact", h1: "Contact Mortgage Refinance Guides", title: "Contact Mortgage Refinance Guides | Editorial Contact", type: "page" },
-  { slug: "privacy-policy", h1: "Privacy Policy", title: "Privacy Policy | Mortgage Refinance Guides", type: "page" },
-  { slug: "terms", h1: "Terms and Conditions", title: "Terms and Conditions | Mortgage Refinance Guides", type: "page" },
-  { slug: "disclaimer", h1: "Financial Disclaimer", title: "Financial Disclaimer | Mortgage Refinance Guides", type: "page" },
-  { slug: "cookie-policy", h1: "Cookie Policy", title: "Cookie Policy | Mortgage Refinance Guides", type: "page" },
-  { slug: "editorial-policy", h1: "Editorial Policy", title: "Editorial Policy | Mortgage Refinance Guides", type: "page" },
-  { slug: "how-we-research", h1: "How We Research", title: "How We Research | Mortgage Refinance Guides", type: "page" },
-  { slug: "sitemap", h1: "HTML Sitemap", title: "HTML Sitemap | Mortgage Refinance Guides", type: "page" },
+  { slug: "about", h1: "About Mortgage Refinance Guides", title: "About Mortgage Refinance Guides | Editorial Mission", type: "page", description: "Meet the editor behind Mortgage Refinance Guides. Learn how we research U.S. refinance rates, closing costs, and lender comparisons using CFPB and FHFA data." },
+  { slug: "contact", h1: "Contact Mortgage Refinance Guides", title: "Contact Mortgage Refinance Guides | Editorial Contact", type: "page", description: "Reach the Mortgage Refinance Guides editorial team for corrections, research questions, or partnership inquiries. We typically respond within 2 business days." },
+  { slug: "privacy-policy", h1: "Privacy Policy", title: "Privacy Policy | Mortgage Refinance Guides", type: "page", description: "Privacy policy for Mortgage Refinance Guides. How we handle visitor data, cookies, and third-party services on our U.S. mortgage refinance editorial site." },
+  { slug: "terms", h1: "Terms and Conditions", title: "Terms and Conditions | Mortgage Refinance Guides", type: "page", description: "Terms of use for Mortgage Refinance Guides. This site provides mortgage refinance information for educational purposes only and does not constitute lending advice." },
+  { slug: "disclaimer", h1: "Financial Disclaimer", title: "Financial Disclaimer | Mortgage Refinance Guides", type: "page", description: "Important disclaimers for Mortgage Refinance Guides. We are not lenders, brokers, or financial advisors. All content is for informational purposes only." },
+  { slug: "cookie-policy", h1: "Cookie Policy", title: "Cookie Policy | Mortgage Refinance Guides", type: "page", description: "Cookie policy for Mortgage Refinance Guides. Details on how we use cookies, analytics, and advertising technology on this site." },
+  { slug: "editorial-policy", h1: "Editorial Policy", title: "Editorial Policy | Mortgage Refinance Guides", type: "page", description: "Editorial policy for Mortgage Refinance Guides. How we maintain independence, verify data sources, and separate editorial content from commercial relationships." },
+  { slug: "how-we-research", h1: "How We Research", title: "How We Research | Mortgage Refinance Guides", type: "page", description: "How Mortgage Refinance Guides researches content. Our editorial process uses CFPB, Freddie Mac, FHFA, and HUD data to verify refinance information." },
+  { slug: "sitemap", h1: "HTML Sitemap", title: "HTML Sitemap | Mortgage Refinance Guides", type: "page", description: "Browse the full HTML sitemap of Mortgage Refinance Guides. Find every pillar guide, calculator, comparison, FAQ, and state refinance page in one index." },
 ];
 
 function escapeHtml(value) {
@@ -359,10 +360,10 @@ function truncateAtWord(text, max) {
 }
 
 function normalizeTitle(title) {
-  if (title.length >= 50 && title.length <= 60) return title;
   const suffix = " | Mortgage Refinance Guides";
-  if ((title + suffix).length <= 60) return title + suffix;
-  return `${truncateAtWord(title, 60 - suffix.length)}${suffix}`;
+  if (title.length >= 50 && title.length <= 70) return title;
+  if ((title + suffix).length <= 70) return title + suffix;
+  return `${truncateAtWord(title, 70 - suffix.length)}${suffix}`;
 }
 
 function normalizeDescription(text) {
@@ -374,6 +375,113 @@ function normalizeDescription(text) {
 
 function urlFor(slug) {
   return slug ? `${domain}/${slug}/` : `${domain}/`;
+}
+
+function buildSchemas(page) {
+  const title = normalizeTitle(page.title);
+  const description = normalizeDescription(page.description);
+  const url = urlFor(page.slug);
+  const image = `${domain}/assets/social-cover.svg`;
+  const schemaType = page.schemaType || page.type;
+  const editor = {
+    "@type": "Person",
+    name: "Javi Pérez",
+    url: "https://www.linkedin.com/in/javi-perez-guides",
+    sameAs: ["https://www.linkedin.com/in/javi-perez-guides"],
+  };
+  const publisher = {
+    "@type": "Organization",
+    name: site.organization.name,
+    logo: { "@type": "ImageObject", url: site.organization.logo },
+  };
+
+  const schemas = [];
+
+  if (page.type === "home") {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: site.name,
+      url: `${domain}/`,
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${domain}/?q={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    });
+  }
+
+  schemas.push({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${domain}/#organization`,
+    name: site.organization.name,
+    url: site.organization.url,
+    logo: site.organization.logo,
+    email: "javiperezguides@gmail.com",
+    founder: {
+      "@type": "Person",
+      name: "Javi Pérez",
+      url: "https://www.linkedin.com/in/javi-perez-guides",
+      sameAs: ["https://www.linkedin.com/in/javi-perez-guides"],
+    },
+  });
+
+  if (Array.isArray(page.breadcrumbs) && page.breadcrumbs.length > 1) {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: page.breadcrumbs.map((crumb, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: crumb.label,
+        item: crumb.href,
+      })),
+    });
+  }
+
+  if (Array.isArray(page.faqs) && page.faqs.length) {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: page.faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.q,
+        acceptedAnswer: { "@type": "Answer", text: faq.a },
+      })),
+    });
+  }
+
+  if (schemaType === "home" || schemaType === "article" || schemaType === "page") {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: title,
+      description,
+      datePublished: lastmod,
+      dateModified: lastmod,
+      editor,
+      publisher,
+      mainEntityOfPage: url,
+      image,
+    });
+  }
+
+  if (schemaType === "calculator") {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      name: title,
+      url,
+      applicationCategory: "FinanceApplication",
+      operatingSystem: "Any",
+      description,
+    });
+  }
+
+  return schemas
+    .map((schema) => `<script type="application/ld+json">${JSON.stringify(schema)}</script>`)
+    .join("\n    ");
 }
 
 function filePathFor(slug) {
@@ -643,7 +751,7 @@ function homeSections() {
         <div class="hero-shell">
           <div class="hero-copy-stack">
             <div class="hero-chip-row">
-              ${badge("Updated 2026")}
+              ${badge(`Updated ${monthYear}`)}
             </div>
             <h1>Refinance your mortgage with cleaner rate comparisons, sharper fee analysis, and premium scenario planning.</h1>
             <p class="hero-copy">Mortgage Refinance Guides combines lender-style quote logic, calculator-driven planning, and state-specific closing cost context so homeowners can compare refinance options with more confidence and less noise.</p>
@@ -869,7 +977,6 @@ function staticPageContent(slug, fromSlug = slug) {
       <div class="callout callout-warning">
         <strong>Important disclaimer:</strong> I am NOT a licensed mortgage broker, loan officer, or financial advisor. Nothing on this site constitutes mortgage, financial, or legal advice. Consult a licensed professional for your specific situation.
       </div>
-      ${authorCard()}
     `,
     contact: `
       ${site.email ? `<p>Editorial inquiries, corrections, partnership disclosures, and research questions can be sent to <a href="mailto:${site.email}">${site.email}</a>. We review feedback related to accuracy, clarity, broken links, and user experience on an ongoing basis.</p>` : `<p>We are updating our contact information. Please check back soon.</p>`}
@@ -912,7 +1019,6 @@ function staticPageContent(slug, fromSlug = slug) {
         <li><a href="https://www.hud.gov" rel="noopener" target="_blank">HUD.gov</a> — Department of Housing and Urban Development program guidelines and FHA requirements</li>
       </ol>
       <p>Rate examples, payment illustrations, and approval estimates are educational. They do not constitute lending offers or guaranteed outcomes. If compensation relationships are introduced, they will be disclosed on relevant pages.</p>
-      ${authorCard()}
     `,
     "how-we-research": `
       <p>We research refinance topics using public mortgage program materials, lender pricing conventions, settlement cost patterns, housing finance guidance, and borrower decision frameworks commonly used by mortgage advisors. We compare note rate, APR, fees, break-even timing, and underwriting fit together.</p>
@@ -1547,22 +1653,6 @@ function layout(page) {
   const title = normalizeTitle(page.title);
   const description = normalizeDescription(page.description);
   const breadcrumbHtml = renderBreadcrumbs(page.slug, page.breadcrumbs);
-  const schemaPayload = {
-    type: page.schemaType || page.type,
-    title,
-    description,
-    url: urlFor(page.slug),
-    image: `${domain}/assets/social-cover.svg`,
-    published: lastmod,
-    modified: lastmod,
-    siteName: site.name,
-    organizationName: site.organization.name,
-    organizationUrl: site.organization.url,
-    organizationLogo: site.organization.logo,
-    breadcrumbs: page.breadcrumbs,
-    faqs: page.faqs || [],
-    calculatorType: page.calculatorType || "",
-  };
 
   return `<!doctype html>
 <html lang="en">
@@ -1589,6 +1679,7 @@ function layout(page) {
     <link rel="preload" href="${assetHref(page.slug, "styles.css")}" as="style" />
     <link rel="stylesheet" href="${assetHref(page.slug, "styles.css")}" />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3733223915347669" crossorigin="anonymous"></script>
+    ${buildSchemas(page)}
   </head>
   <body data-page-type="${escapeHtml(page.type)}">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -1621,7 +1712,7 @@ function layout(page) {
     </header>
 
     <main id="main-content">
-      ${page.slug ? `<section class="hero hero-inner"><div class="container">${breadcrumbHtml}<div class="page-hero"><div><span class="badge">Updated ${year}</span><h1>${escapeHtml(page.h1)}</h1><p class="hero-copy">${escapeHtml(description)}</p></div><div class="hero-side panel">${page.heroVisual || inlineIllustration(page.visual || "house")}</div></div></div></section>` : page.content}
+      ${page.slug ? `<section class="hero hero-inner"><div class="container">${breadcrumbHtml}<div class="page-hero"><div><span class="badge">Updated ${monthYear}</span><h1>${escapeHtml(page.h1)}</h1><p class="hero-copy">${escapeHtml(description)}</p></div><div class="hero-side panel">${page.heroVisual || inlineIllustration(page.visual || "house")}</div></div></div></section>` : page.content}
       ${page.slug ? `<section class="section page-body"><div class="container layout-grid"><article class="article-body">${page.intro ? `<p class="lead">${escapeHtml(page.intro)}</p>` : ""}${page.metrics || ""}${page.content}${page.faqs?.length ? renderFaqs(page.faqs) : ""}${authorCard()}</article><aside class="article-sidebar"><div class="sticky-panel">${page.sidebar || renderSidebar(page.slug)}</div></aside></div></section>` : ""}
       ${page.related || ""}
     </main>
@@ -1664,7 +1755,6 @@ function layout(page) {
       </div>
     </div>
 
-    <div id="schema-data" data-schema="${escapeHtml(JSON.stringify(schemaPayload))}"></div>
     <script src="${assetHref(page.slug, "main.js")}" defer></script>
   </body>
 </html>`;
@@ -1911,7 +2001,7 @@ function buildStaticPage(item) {
     schemaType: "article",
     title: item.title,
     h1: item.h1,
-    description: `${item.h1} for ${brand.toLowerCase()}, including editorial standards, trust details, policy information, or contact options.`,
+    description: item.description || `${item.h1} for ${brand.toLowerCase()}, including editorial standards, trust details, policy information, or contact options.`,
     intro: item.slug === "sitemap" ? "Use this HTML sitemap to browse the full editorial structure of the website." : "",
     breadcrumbs: breadcrumbs(item.slug, item.h1),
     metrics: "",
@@ -3284,124 +3374,6 @@ function mainJs() {
   return `
 const COOKIE_NAME = "mrg_cookie_pref";
 
-function parseSchema() {
-  const holder = document.querySelector("#schema-data");
-  if (!holder) return null;
-  try {
-    return JSON.parse(holder.dataset.schema || "{}");
-  } catch {
-    return null;
-  }
-}
-
-function injectSchema() {
-  const data = parseSchema();
-  if (!data || document.querySelector("#dynamic-schema")) return;
-
-  const graph = [
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: data.siteName,
-      url: "https://mortgagerefinanceguides.com/",
-      potentialAction: {
-        "@type": "SearchAction",
-        target: "https://mortgagerefinanceguides.com/?q={search_term_string}",
-        "query-input": "required name=search_term_string",
-      },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "@id": "https://mortgagerefinanceguides.com/#organization",
-      name: data.organizationName,
-      url: data.organizationUrl,
-      logo: data.organizationLogo,
-      email: "javiperezguides@gmail.com",
-      founder: {
-        "@type": "Person",
-        name: "Javi Pérez",
-        url: "https://www.linkedin.com/in/javi-perez-guides",
-        sameAs: ["https://www.linkedin.com/in/javi-perez-guides"],
-      },
-    },
-  ];
-
-  if (Array.isArray(data.breadcrumbs) && data.breadcrumbs.length > 1) {
-    graph.push({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: data.breadcrumbs.map((crumb, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        name: crumb.label,
-        item: crumb.href,
-      })),
-    });
-  }
-
-  if (Array.isArray(data.faqs) && data.faqs.length) {
-    graph.push({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: data.faqs.map((faq) => ({
-        "@type": "Question",
-        name: faq.q,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.a,
-        },
-      })),
-    });
-  }
-
-  if (data.type === "home" || data.type === "article" || data.type === "page") {
-    const article = {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      headline: data.title,
-      description: data.description,
-      datePublished: data.published,
-      dateModified: data.modified,
-      editor: {
-        "@type": "Person",
-        name: "Javi Pérez",
-        url: "https://www.linkedin.com/in/javi-perez-guides",
-        sameAs: ["https://www.linkedin.com/in/javi-perez-guides"],
-      },
-      publisher: {
-        "@type": "Organization",
-        name: data.organizationName,
-        logo: {
-          "@type": "ImageObject",
-          url: data.organizationLogo,
-        },
-      },
-      mainEntityOfPage: data.url,
-      image: data.image,
-    };
-    graph.push(article);
-  }
-
-  if (data.type === "calculator") {
-    graph.push({
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      name: data.title,
-      url: data.url,
-      applicationCategory: "FinanceApplication",
-      operatingSystem: "Any",
-      description: data.description,
-    });
-  }
-
-  const script = document.createElement("script");
-  script.id = "dynamic-schema";
-  script.type = "application/ld+json";
-  script.textContent = JSON.stringify(graph);
-  document.head.appendChild(script);
-}
-
 function setupMenu() {
   const button = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".site-nav");
@@ -3627,7 +3599,6 @@ function markCurrentNav() {
 
 document.addEventListener("DOMContentLoaded", () => {
   normalizeLocalPreviewLinks();
-  injectSchema();
   setupMenu();
   setupCookieBanner();
   setupCalculators();
